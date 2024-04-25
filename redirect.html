@@ -2,41 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Private IP Address</title>
+    <title>Client IP Address</title>
     <script>
-        function getPrivateIP() {
-            // Create a RTCPeerConnection object
-            var pc = new RTCPeerConnection({iceServers: []});
-            pc.createDataChannel("");
+        function displayIPAddress() {
+            // Get the IP address from the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const ipAddress = urlParams.get('ip');
 
-            // Listen for candidate events
-            pc.onicecandidate = function(event) {
-                if (!event.candidate) {
-                    return;
-                }
-
-                // Extract the IP address from the candidate
-                var ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3})/;
-                var ipAddress = ipRegex.exec(event.candidate.candidate)[1];
-
-                document.getElementById('private-ip').innerText = ipAddress;
-
-                // Close the peer connection after getting the IP address
-                pc.close();
-            };
-
-            // Create an SDP offer to trigger the candidate gathering process
-            pc.createOffer()
-                .then(pc.setLocalDescription.bind(pc));
+            // Display the IP address
+            document.getElementById('ip-address').innerText = ipAddress || 'IP address not provided';
         }
 
         window.onload = function() {
-            getPrivateIP();
+            displayIPAddress();
         };
     </script>
 </head>
 <body>
-    <h1>Your Private IP Address:</h1>
-    <p id="private-ip">Fetching private IP address...</p>
+    <h1>Client IP Address:</h1>
+    <p id="ip-address">Fetching IP address...</p>
 </body>
 </html>
