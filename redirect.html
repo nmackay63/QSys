@@ -11,7 +11,7 @@
 				const ipAddress = urlParams.get('state');
 				const authCode = urlParams.get('code')
 				
-				redirectUrl = "https://"+ipAddress+":8080/?code="+authCode+"/done";
+				redirectUrl = "http://"+ipAddress+":8080/?code="+authCode+"/done";
 			}
 
 			window.onload = function() {
