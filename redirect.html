@@ -23,3 +23,31 @@
     <p id="ip-address">Fetching IP address...</p>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5;url=https://www.example.com">
+    <title>Redirecting...</title>
+    <script>
+        function getIPAddress() {
+            // Get the IP address from the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const ipAddress = urlParams.get('ip');
+
+            // Display the IP address
+            document.getElementById('ip-address').innerText = ipAddress || 'IP address not provided';
+        }
+
+        window.onload = function() {
+            getIPAddress();
+        };
+    </script>
+</head>
+<body>
+    <p>This page has moved. You will be redirected to the new location in 5 seconds.</p>
+    <p>If you are not redirected automatically, <a href="https://id="ip-address:8080">click here</a>.</p>
+</body>
+</html>
