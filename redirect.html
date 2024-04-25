@@ -2,11 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5;url=https://www.example.com">
-    <title>Redirecting...</title>
+    <title>Client IP Address</title>
+    <script>
+        function getClientIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-address').innerText = data.ip;
+                })
+                .catch(error => {
+                    console.error('Error fetching IP address:', error);
+                    document.getElementById('ip-address').innerText = 'Error fetching IP address';
+                });
+        }
+
+        window.onload = function() {
+            getClientIP();
+        };
+    </script>
 </head>
 <body>
-    <p>This page has moved. You will be redirected to the new location in 5 seconds.</p>
-    <p>If you are not redirected automatically, <a href="https://www.example.com">click here</a>.</p>
+    <h1>Your IP Address:</h1>
+    <p id="ip-address">Fetching IP address...</p>
 </body>
 </html>
