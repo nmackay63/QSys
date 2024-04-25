@@ -2,33 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client IP Address</title>
-    <script>
-        function displayIPAddress() {
-            // Get the IP address from the query parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const ipAddress = urlParams.get('ip');
-
-            // Display the IP address
-            document.getElementById('ip-address').innerText = ipAddress || 'IP address not provided';
-        }
-
-        window.onload = function() {
-            displayIPAddress();
-        };
-    </script>
-</head>
-<body>
-    <h1>Client IP Address:</h1>
-    <p id="ip-address">Fetching IP address...</p>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <meta http-equiv="refresh" content="5;url=https://www.example.com">
     <title>Redirecting...</title>
     <script>
