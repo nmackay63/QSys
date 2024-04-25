@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script>
-        function getIPAddress() {
-            // Get the IP address from the query parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const ipAddress = urlParams.get('ip');
+	<head>
+		<meta charset="UTF-8">
+		<title>Spotify Remote for Q-Sys</title>
+		<script>
+			var redirectUrl
+			function displayIPAddress() {
+				// Get the IP address from the query parameters
+				const urlParams = new URLSearchParams(window.location.search);
+				const ipAddress = urlParams.get('state');
+				const authCode = urlParams.get('code')
+				
+				redirectUrl = "https://"+ipAddress+":8080/?code="+authCode+"/done";
+			}
 
-            // Display the IP address
-            document.getElementById('ip-address').innerText = ipAddress || 'IP address not provided';
-        }
-
-        window.onload = function() {
-            getIPAddress();
-        };
-    </script>
-    <meta http-equiv="refresh" content="5;url=https://www.example.com">
-</head>
-<body>
-    <p>This page has moved. You will be redirected to the new location in 5 seconds.</p>
-    <p>If you are not redirected automatically, <a href="https://id="ip-address:8080">click here</a>.</p>
-</body>
+			window.onload = function() {
+				displayIPAddress();
+			};
+			
+			setTimeout(function() {
+				window.location.href = redirectUrl;
+			}, 3000); // Redirect after 3 seconds (adjust as needed)
+		</script>
+	</head>
+	<body>
+		<center>
+			<h1>Please wait while Spotify authenticates the user...</h1>
+		</center>
+	</body>
 </html>
