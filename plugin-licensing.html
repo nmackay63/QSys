@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Key Verification</h1>
+    <p>Enter a key to verify if it exists in the database:</p>
+    <input type="text" id="keyInput" placeholder="Enter key">
+    <button onclick="verifyKey()">Verify</button>
+    
+    <div id="result" class="result"></div>
+
+    <script>
+        // Mock database
+        const database = [
+            "key123",
+            "key456",
+            "key789",
+            "keyABC",
+            "keyDEF"
+        ];
+
+        function verifyKey() {
+            const key = document.getElementById("keyInput").value;
+            const resultDiv = document.getElementById("result");
+
+            if (database.includes(key)) {
+                resultDiv.textContent = `The key "${key}" exists in the database.`;
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.textContent = `The key "${key}" does not exist in the database.`;
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
