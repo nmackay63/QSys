@@ -3,33 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Verification</title>
+    <title>Password Protected Page</title>
     <script>
-        async function checkKey() {
-            // URL of the remote JSON file
-            const url = 'https://nmackay63.github.io/QSys/licenses.json';
-            const keyToCheck = document.getElementById('keyInput').value;
+        // Define the password
+        const correctPassword = "yourPassword"; // Change this to your desired password
 
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                // Check if the key exists in the JSON data
-                const exists = data.includes(keyToCheck);
-
-                // Display the result as true or false
-                document.getElementById('result').textContent = `Key Exists: ${exists}`;
-            } catch (error) {
-                console.error('Error fetching the JSON file:', error);
-                document.getElementById('result').textContent = 'Error fetching data';
+        // Function to check the password
+        function checkPassword() {
+            const userPassword = prompt("Please enter the password:");
+            if (userPassword === correctPassword) {
+                document.getElementById("protectedContent").style.display = "block";
+            } else {
+                alert("Incorrect password. Access denied.");
+                document.body.innerHTML = ""; // Clear the body if access is denied
             }
         }
+
+        // Check password when the page loads
+        window.onload = checkPassword;
     </script>
+    <style>
+        #protectedContent {
+            display: none; /* Initially hide the content */
+        }
+    </style>
 </head>
 <body>
-    <h1>Key Verification</h1>
-    <input type="text" id="keyInput" placeholder="Enter key to check">
-    <button onclick="checkKey()">Check Key</button>
-    <p id="result"></p>
+    <h1>Password Protected Content</h1>
+    <div id="protectedContent">
+        <p>Welcome! You have accessed the protected content.</p>
+        <p>This content is only visible to users who enter the correct password.</p>
+    </div>
 </body>
 </html>
