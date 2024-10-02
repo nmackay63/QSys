@@ -1,6 +1,6 @@
 [
     {
-        authorizedUsers: {
+        "authorizedUsers": {
             "key123",
             "key456",
             "key789",
