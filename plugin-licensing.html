@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Verification</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+    <script>
+        async function checkKey() {
+            // URL of the remote JSON file
+            const url = 'https://nmackay63.github.io/QSys/licenses.json';
+            const keyToCheck = document.getElementById('keyInput').value;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Check if the key exists in the JSON data
+                const exists = data.includes(keyToCheck);
+
+                // Display the result as true or false
+                document.getElementById('result').textContent = `Key Exists: ${exists}`;
+            } catch (error) {
+                console.error('Error fetching the JSON file:', error);
+                document.getElementById('result').textContent = 'Error fetching data';
+            }
         }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    </script>
 </head>
 <body>
-    <h1>404 Not Found</h1>
-    
-    <div id="result" class="result"></div>
-
-    <script>
-        // Key database
-            "key123",
-            "key456",
-            "key789",
-            "keyABC",
-            "keyDEF"
-
-    </script>
+    <h1>Key Verification</h1>
+    <input type="text" id="keyInput" placeholder="Enter key to check">
+    <button onclick="checkKey()">Check Key</button>
+    <p id="result"></p>
 </body>
 </html>
