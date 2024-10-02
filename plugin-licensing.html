@@ -4,36 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Verification</title>
-    <script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>404 Not Found</h1>
+    
+    <div id="result" class="result"></div>
+
+    <keys>
         // Mock database
-        const database = [
             "key123",
             "key456",
             "key789",
             "keyABC",
             "keyDEF"
-        ];
 
-        // Function to check if the key exists
-        function checkKey() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const key = urlParams.get('key');
-
-            // Prepare the response
-            let response = '<key>false</key>';
-            if (key) {
-                const exists = database.includes(key);
-                response = `<key>${exists}</key>`;
-            }
-
-            // Display the response as XML
-            document.body.textContent = response;
-        }
-
-        // Call the function when the page loads
-        window.onload = checkKey;
-    </script>
-</head>
-<body>
+    </keys>
 </body>
 </html>
