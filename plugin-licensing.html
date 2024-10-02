@@ -6,7 +6,6 @@
     <title>Key Verification</title>
 </head>
 <body>
-    <div id="result" class="result"></div>
     <script>
         // Mock database
         const database = [
@@ -16,28 +15,20 @@
             "keyABC",
             "keyDEF"
         ];
-        
-        function getKeyFromUrl() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('key');
-        }
 
-        function verifyKey(key) {
-            const resultDiv = document.getElementById("result");
-            const exists = database.includes(key);
-            const jsonResponse = { key: exists };
+        // Get the key from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
 
-            // Display JSON response
-            resultDiv.textContent = JSON.stringify(jsonResponse);
-        }
+        // Prepare the JSON response
+        const response = { key: false };
 
-        // Get the key from the URL and verify it
-        const key = getKeyFromUrl();
         if (key) {
-            verifyKey(key);
-        } else {
-            document.getElementById("result").textContent = "No key provided in the URL.";
+            response.key = database.includes(key);
         }
+
+        // Return raw JSON
+        document.body.textContent = JSON.stringify(response);
     </script>
 </body>
 </html>
