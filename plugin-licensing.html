@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Verification</title>
-</head>
-<body>
     <script>
         // Mock database
         const database = [
@@ -16,19 +14,27 @@
             "keyDEF"
         ];
 
-        // Get the key from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const key = urlParams.get('key');
+        // Function to check if key exists
+        function checkKey() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
 
-        // Prepare the JSON response
-        const response = { key: false };
+            const response = { key: false };
 
-        if (key) {
-            response.key = database.includes(key);
+            if (key) {
+                response.key = database.includes(key);
+            }
+
+            // Return JSON response
+            document.body.textContent = JSON.stringify(response);
+            // Set the content type for the response
+            document.contentType = "application/json";
         }
 
-        // Return raw JSON
-        document.body.textContent = JSON.stringify(response);
+        // Run the function on page load
+        window.onload = checkKey;
     </script>
+</head>
+<body>
 </body>
 </html>
