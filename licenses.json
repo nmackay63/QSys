@@ -1,11 +1,9 @@
-[
-    {
-        "authorizedUsers": {
-            "key123",
-            "key456",
-            "key789",
-            "keyABC",
-            "keyDEF"
-        }
-    }
-]
+{"authorizedUsers":
+    [
+    "key123",
+    "key456",
+    "key789",
+    "keyABC",
+    "keyDEF"
+    ]
+}
