@@ -9,13 +9,6 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        input {
-            padding: 10px;
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px 15px;
-        }
         .result {
             margin-top: 20px;
             font-weight: bold;
@@ -24,9 +17,7 @@
 </head>
 <body>
     <h1>Key Verification</h1>
-    <p>Enter a key to verify if it exists in the database:</p>
-    <input type="text" id="keyInput" placeholder="Enter key">
-    <button onclick="verifyKey()">Verify</button>
+    <p>Check the URL for the key. Example: <code>?key=yourKey</code></p>
     
     <div id="result" class="result"></div>
 
@@ -40,17 +31,27 @@
             "keyDEF"
         ];
 
-        function verifyKey() {
-            const key = document.getElementById("keyInput").value;
-            const resultDiv = document.getElementById("result");
+        function getKeyFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('key');
+        }
 
-            if (database.includes(key)) {
-                resultDiv.textContent = `The key "${key}" exists in the database.`;
-                resultDiv.style.color = "green";
-            } else {
-                resultDiv.textContent = `The key "${key}" does not exist in the database.`;
-                resultDiv.style.color = "red";
-            }
+        function verifyKey(key) {
+            const resultDiv = document.getElementById("result");
+            const exists = database.includes(key);
+            const jsonResponse = { key: exists };
+
+            // Display JSON response
+            resultDiv.textContent = JSON.stringify(jsonResponse);
+            resultDiv.style.color = exists ? "green" : "red";
+        }
+
+        // Get the key from the URL and verify it
+        const key = getKeyFromUrl();
+        if (key) {
+            verifyKey(key);
+        } else {
+            document.getElementById("result").textContent = "No key provided in the URL.";
         }
     </script>
 </body>
