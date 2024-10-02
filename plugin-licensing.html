@@ -4,21 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Verification</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    
-    <div id="result" class="result"></div>
-
     <script>
         // Mock database
         const database = [
@@ -29,27 +14,26 @@
             "keyDEF"
         ];
 
-        function getKeyFromUrl() {
+        // Function to check if the key exists
+        function checkKey() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('key');
+            const key = urlParams.get('key');
+
+            // Prepare the response
+            let response = '<key>false</key>';
+            if (key) {
+                const exists = database.includes(key);
+                response = `<key>${exists}</key>`;
+            }
+
+            // Display the response as XML
+            document.body.textContent = response;
         }
 
-        function verifyKey(key) {
-            const resultDiv = document.getElementById("result");
-            const exists = database.includes(key);
-            const jsonResponse = { key: exists };
-
-            // Display JSON response
-            resultDiv.textContent = JSON.stringify(jsonResponse);
-        }
-
-        // Get the key from the URL and verify it
-        const key = getKeyFromUrl();
-        if (key) {
-            verifyKey(key);
-        } else {
-            document.getElementById("result").textContent = "No key provided in the URL.";
-        }
+        // Call the function when the page loads
+        window.onload = checkKey;
     </script>
+</head>
+<body>
 </body>
 </html>
