@@ -60,9 +60,10 @@
 
         function displayIPAddress() {
             const urlParams = new URLSearchParams(window.location.search);
+			const port = urlParams.get('port');
             const ipAddress = urlParams.get('state');
             const authCode = urlParams.get('code');
-            redirectUrl = "http://" + ipAddress + ":8080/?code=" + authCode + "/done";
+            redirectUrl = "http://" + ipAddress + ":" + port + "/?code=" + authCode + "/done";
         }
 
         window.onload = function() {
