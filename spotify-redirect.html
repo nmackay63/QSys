@@ -60,10 +60,14 @@
 
         function displayIPAddress() {
             const urlParams = new URLSearchParams(window.location.search);
-			const port = urlParams.get('port');
-            const ipAddress = urlParams.get('state');
-            const authCode = urlParams.get('code');
-            redirectUrl = "http://" + ipAddress + ":" + port + "/?code=" + authCode + "/done";
+            const state = urlParams.get('state');
+			const match = text.match(/state=([\d.]+):(\d+)/);
+			if (match) {
+			    const ipAddress = match[1];
+			    const port = match[2];
+				const authCode = urlParams.get('code');
+           		redirectUrl = "http://" + ipAddress + ":" + port + "/?code=" + authCode + "/done";
+			}
         }
 
         window.onload = function() {
