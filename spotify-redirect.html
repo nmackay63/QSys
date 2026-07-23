@@ -56,20 +56,20 @@
         }
     </style>
     <script>
-        var redirectUrl;
+        let redirectUrl;
 
-        function displayIPAddress() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const state = urlParams.get('state');
-			const match = text.match(/state=([\d.]+):(\d+)/);
-			if (match) {
-			    const ipAddress = match[1];
-			    const port = match[2];
-				const authCode = urlParams.get('code');
-           		redirectUrl = "http://" + ipAddress + ":" + port + "/?code=" + authCode + "/done";
-			}
-        }
-
+		function displayIPAddress() {
+		  const url = new URLSearchParams(window.location.search);
+		  const state = url.searchParams.get("state");
+		  const authCode = url.searchParams.get("code");
+		  const match = state.match(/^([\d.]+):(\d+)$/);
+		  if (match) {
+		    const ipAddress = match[1];
+		    const port = match[2];
+		    redirectUrl = `http://${ipAddress}:${port}/?code=${authCode}/done`;
+		  }
+		}
+		
         window.onload = function() {
             displayIPAddress();
             setTimeout(function() {
