@@ -58,6 +58,8 @@
     <script>
 		var redirectUrl;
 		
+		console.log("Full URL:", window.location.href);
+		
 		function displayIPAddress() {
 		    const params = new URLSearchParams(window.location.search);
 		    const state = params.get("state");
@@ -76,7 +78,7 @@
 		
 		window.onload = function () {
 		    displayIPAddress();
-		    console.log(redirectUrl);
+		    console.log("Redirecting to:", redirectUrl);
 		    if (redirectUrl) {
 		        setTimeout(function () {
 		            window.location.href = redirectUrl;
