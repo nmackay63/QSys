@@ -73,7 +73,7 @@
 		        console.error("Invalid state format");
 		        return;
 		    }
-		    redirectUrl = `http://${state}/done?code=${authCode}`;
+		    redirectUrl = `http://${state}/?code=${authCode}/done`;
 		}
 		
 		window.onload = function () {
